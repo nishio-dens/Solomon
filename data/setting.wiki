@@ -1,0 +1,114 @@
+﻿#+Title: Solomonの設置方法
+#+Date: 2011-12-30
+
+''目次''
+
+{{toc(setting.wiki)}}
+
+*Solomonの設置方法(仮)
+
++設置したいサーバにGit cloneする
++setting.configいじる
++permissionの設定を変える
++page.rbにアクセスしてみる。
+
+*Permission
+
+-cacheディレクトリは777
+-そのほかは755
+
+*必要なもの
+
+-ruby1.8.7以降
+-Grit
+
+(Gritは gem install Gritでインストール可能)
+
+*Settings.configの編集
+
+SettingファイルはYAML文法を採用しています。
+
+''settings.configのサンプル''
+
+>|
+Git: true 
+GitBare: true 
+
+#Local Preview Serverにかかわる設定
+LocalDataStorePath: ./data/store
+
+#Git Repository使用時の設定
+GitRepository: /var/www/git/solomon_document  #GitリポジトリのPath
+
+#cache関係
+CacheDirectory: cache
+
+#ページにかかわる設定
+Encoding: UTF-8 
+FrontPage: index.wiki
+SideMenu: side.wiki
+Header: header.wiki
+Footer: footer.wiki
+SiteName: "Solomon"
+Description: "Git and Wiki based CMS system" 
+GlobalNavi:
+  - name: FrontPage 
+    address: "http://cms.densan-labs.net/page.rb"
+  - name: Search
+    address: "http://cms.densan-labs.net/page.rb?c=search"
+
+#サイトにかからる設定
+SiteAddress: "http://cms.densan-labs.net/"
+IndexHandler: page.rb
+
+#preview_server起動時にのみ使用する設定
+Handler:
+  index.cgi:  page.rb
+|<
+
+**設定項目の説明
+
+-Git
+-- Wikiデータ保存場所がGit上にあるのならばtrueを、そうでなければfalseを書いてください
+
+-GitBare
+-- Git上にデータが存在し、かつ共有リポジトリ(Git bare)であるならば、trueにしてください
+
+-LocalDataStorePath
+-- Git上ではないローカルディレクトリにドキュメントがある場合、そのパスを指定してください
+
+-GitRepository
+-- Gitのリポジトリパスを設定してください
+
+-CacheDirectory
+-- 基本的にいじらないでください。画像ファイルなどのキャッシュを置くディレクトリの設定です。
+
+-Encoding
+-- 現状機能してません。
+
+-FrontPage
+-- Indexページに表示するドキュメントのファイル名を指定してください。
+
+-SideMenu
+-- Sidemenuとして採用するドキュメントのファイル名を指定してください。
+
+-SiteName
+-- サイトの名前を設定してください
+
+-Description
+-- サイトの概要を設定してください
+
+-GlobalNavi
+-- GlobalNaviに表示させたい項目を書いてください。YAML形式です。
+
+-SiteAddress
+-- Siteのアドレスを書いてください。
+
+-IndexHandler
+-- いじらないでください。
+
+-Handler
+-- いじらないでください。
+
+
+
