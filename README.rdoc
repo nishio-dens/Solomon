@@ -1,0 +1,17 @@
+= Solomon : Git and Wiki Based CMS System
+
+== What is Solomon?
+
+Solomon is git and wiki based CMS system.
+You can update document using git push.
+
+== Requirement
+
+*Ruby1.8.7 later
+*Grit (type "gem install grit" command in your temrinal)
+
+== Detail
+
+See http://cms.densan-labs.net/ 
+
+

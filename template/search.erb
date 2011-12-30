@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title><%= @contents[:Title] %></title>
+    <link rel="stylesheet" type="text/css; charset=utf-8" href="theme/import.css" />
+  </head>
+  <body class ="mainIndex double-l fmax">
+    <!-- コンテンツヘッダー部分 -->
+    <div id="header">
+      <p class="siteName"><%= @contents[:SiteName] %></p>
+      <p class="description"><%= @contents[:Description] %></p>
+      <% if @global_navi %>
+        <ul id="globalNavi">
+          <% @global_navi.each do |data| %>
+            <li><a href="<%=data[:address]%>"><%= data[:name] %></a></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <!-- コンテンツヘッダー部分 --> 
+
+    <!-- メイン部 -->
+    <div id="content">
+      <!-- main contents -->
+      <div id="main">
+        <div class="section entry">
+          <h2>Search</h2>
+          <p>指定した単語を含むページを検索します。</p>
+          <form method="get" action="<%= "#{@contents[:SiteAddress]}/#{@contents[:IndexHandler]}"%>" class="search">
+            <div>
+              <input type="hidden" name="c" value="search">
+              <input type="text" name="key" class="textBox">
+              <input type="submit" value="Search" class="btn">
+            </div>
+          </form>
+          <% if @contents[:Keyword] %>
+            <%= @contents[:Keyword] %>の検索を行った結果、<%= @contents[:ResultNum] %>件の
+            データが見つかりました。検索結果は以下の通りです
+          <% end %>
+          <% if @contents[:Result] %>
+            <ul>
+              <% @contents[:Result].each do |data| %>
+                <li><a href="<%= data[:address] %>"> <%= data[:title] %> </a>
+                (Date: <%= data[:date] %>) - [ <%= data[:snippet] %> ] </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+        </div>
+      </div>
+      <!-- main contents -->
+
+      <!-- sidemenu -->
+      <div id="utilities">
+        <dl class="navi">
+          <%= @contents[:SideContents] %>
+        </dl>
+      </div>
+      <!-- sidemenu -->
+
+    </div>
+    <!-- メイン部 -->
+  </body>
+</html>

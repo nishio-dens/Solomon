@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title><%= @contents[:Title] %></title>
+    <link rel="stylesheet" type="text/css; charset=utf-8" href="theme/import.css" />
+  </head>
+  <body class ="mainIndex double-l fmax">
+    <!-- コンテンツヘッダー部分 -->
+    <div id="header">
+      <p class="siteName"><%= @contents[:SiteName] %></p>
+      <p class="description"><%= @contents[:Description] %></p>
+      <% if @global_navi %>
+        <ul id="globalNavi">
+          <% @global_navi.each do |data| %>
+            <li><a href="<%=data[:address]%>"><%= data[:name] %></a></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <!-- コンテンツヘッダー部分 --> 
+
+    <!-- メイン部 -->
+    <div id="content">
+      <!-- main contents -->
+      <div id="main">
+        <div class="section entry">
+          <%= @contents[:MainContents] %> 
+          <% if !@contents[:MainContents] %>
+            <%= "Wiki File Not Found" %>
+          <% end %>
+        </div>
+      </div>
+      <!-- main contents -->
+
+      <!-- sidemenu -->
+      <div id="utilities">
+        <dl class="navi">
+          <%= @contents[:SideContents] %>
+        </dl>
+      </div>
+      <!-- sidemenu -->
+      
+    </div>
+    <!-- メイン部 -->
+  </body>
+</html>
